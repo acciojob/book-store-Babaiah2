@@ -18,10 +18,9 @@ public class BookRepository {
     }
 
     public Book findBookById(int id){
-        if(bookDb.containsKey(id))
+
             return bookDb.get(id);
 
-        return null;
     }
 
     public List<Book> findAll(){
