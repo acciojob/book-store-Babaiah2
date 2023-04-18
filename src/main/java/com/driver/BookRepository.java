@@ -9,33 +9,61 @@ public class BookRepository {
     public BookRepository(){
         
     }
+    HashMap<Integer,Book> bookDb = new HashMap<>();
 
     public Book save(Book book){
-        return null;
+
+        bookDb.put(book.getId(), book);
+        return book;
     }
 
     public Book findBookById(int id){
+        if(bookDb.containsKey(id))
+            return bookDb.get(id);
 
         return null;
     }
 
     public List<Book> findAll(){
-        return null;
+        List<Book> booklist = new ArrayList<>();
+        for(Integer id: bookDb.keySet()) {
+            booklist.add(bookDb.get(id));
+        }
+
+        return booklist;
     }
 
     public void deleteBookById(int id){
-        return;
+
+        if(bookDb.containsKey(id)){
+            bookDb.remove(id);
+         }
     }
 
     public void deleteAll(){
+        bookDb.clear();
         return;
     }
 
     public List<Book> findBooksByAuthor(String author){
-        return null;
+        List<Book> bookAuthorList = new ArrayList<>();
+
+        for(Integer id: bookDb.keySet()){
+            if(bookDb.get(id).getAuthor().equals(author)){
+                bookAuthorList.add(bookDb.get(id));
+            }
+        }
+        return bookAuthorList;
     }
 
     public List<Book> findBooksByGenre(String genre){
-        return null;
+        List<Book> genreBookList = new ArrayList<>();
+
+        for(Integer id: bookDb.keySet()){
+            if(bookDb.get(id).getGenre().equals(genre)){
+                genreBookList.add(bookDb.get(id));
+            }
+        }
+        return genreBookList;
     }
 }

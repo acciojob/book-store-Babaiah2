@@ -3,10 +3,9 @@ package com.driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("books")
@@ -19,5 +18,34 @@ public class BookController {
     public ResponseEntity createBook(@RequestBody Book book){
         Book newbook = bookService.createBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
+    }
+    @GetMapping("/get-book-by-id/{id}")
+    public Book findBookById(@PathVariable("id")String id){
+        return bookService.findBookById(id);
+    }
+
+    @DeleteMapping("/delete-book-by-id/{id}")
+    public void deleteBookById(@PathVariable("id") String id){
+        bookService.deleteBookById(id);
+    }
+
+    @GetMapping("/get-all-books")
+    public List<Book> getAllBooks(){
+       return bookService.findAllBooks();
+
+    }
+
+    @GetMapping("/get-books-by-author/{name}")
+    public List<Book> getBookByAuthor(@PathVariable("name") String authorName){
+        return bookService.findBooksByAuthor(authorName);
+
+    }
+    @GetMapping("get-books-by-genre/{genre}")
+    public List<Book> getBookByGenre(@PathVariable("genre") String genreName){
+        return bookService.findBooksByGenre(genreName);
+    }
+    @DeleteMapping("delete-all-books")
+    public void deleteAllBooks(){
+        bookService.deleteAllBooks();
     }
 }
