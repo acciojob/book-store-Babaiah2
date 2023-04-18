@@ -33,16 +33,17 @@ public class BookRepository {
         return booklist;
     }
 
-    public void deleteBookById(int id){
+    public String deleteBookById(int id){
 
         if(bookDb.containsKey(id)){
             bookDb.remove(id);
          }
+        return "book is deleted";
     }
 
-    public void deleteAll(){
+    public String deleteAll(){
         bookDb.clear();
-        return;
+        return "all books are deleted";
     }
 
     public List<Book> findBooksByAuthor(String author){
